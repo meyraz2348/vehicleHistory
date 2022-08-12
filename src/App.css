@@ -1,0 +1,9 @@
+.App {
+  background-color: #c1bfc021;
+  /* height: 60rem; */
+  min-height: 15rem;
+  display: block;
+  align-items: center;
+  place-items: center;
+  place-content: center;
+}

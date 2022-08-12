@@ -1,0 +1,34 @@
+.newVehicleLog {
+  border: 1px solid red;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  min-width: 10rem;
+}
+.rego {
+  border: 1px solid yellow;
+  place-items: center;
+  width: 100%;
+}
+.driver {
+  border: 1px solid salmon;
+  place-content: center;
+  place-items: center;
+}
+
+.purpose {
+  border: 1px solid skyblue;
+
+  place-content: center;
+  place-items: center;
+}
+.dateClass {
+  border: 1px solid rebeccapurple;
+
+  place-content: center;
+  place-items: center;
+}
+.createEntryButton {
+  place-content: center;
+  place-items: center;
+}
