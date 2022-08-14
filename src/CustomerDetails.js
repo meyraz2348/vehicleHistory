@@ -3,12 +3,12 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function CustomerDetails(props) {
-  const rego = props.rego;
-  const driver = props.driver;
-  const purpose = props.purpose;
+  const rego = props.rego.toUpperCase();
+  const driver = props.driver.toUpperCase();
+  const purpose = props.purpose.toUpperCase();
   const date = props.date;
   const iconDirection = purpose.toLowerCase() === "rent" ? true : false;
-  const backGroundCol = iconDirection ? "green" : "red";
+  const backGroundCol = iconDirection ? "#83f28f" : "#FFCCCB";
   return (
     <>
       <div

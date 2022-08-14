@@ -9,7 +9,9 @@ import Container from "@mui/material/Container";
 function App() {
   const [newUserEntry, setNewUserEntry] = useState(12);
   const [vehicleHistoryArray, setVehicleHistoryArray] = useState([]);
+  const [searchPerformed, setSearchPerformed] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [search, setSearch] = useState(null);
   const searchRef = useRef(null);
   const userSearchArray = [];
   const searchArray = [];
@@ -36,11 +38,18 @@ function App() {
       setVehicleHistoryArray(searchArray);
     };
     fetchUserDetails();
-  }, [newUserEntry, vehicleHistoryArray]);
+  }, [newUserEntry]);
 
   const userSearchHandler = async () => {
-    console.log("in userSearchHandler");
-    console.log(vehicleHistoryArray);
+    setSearch((ser) => {
+      return searchRef.current.value;
+    });
+    if (search) {
+      console.log("inside if");
+      setSearchPerformed((se) => !se);
+    }
+    searchRef.current.value = "";
+    console.log(searchPerformed);
     for (const key in vehicleHistoryArray) {
       if (
         vehicleHistoryArray[key].rego.toLowerCase() ===
@@ -55,20 +64,20 @@ function App() {
           purpose: vehicleHistoryArray[key].purpose,
           date: vehicleHistoryArray[key].date,
         });
-        console.log(userSearchArray);
       }
     }
-
-    console.log(vehicleHistoryArray);
   };
   const openModalHandler = () => {
     setIsModalOpen(true);
   };
   const closeModalHandler = (props) => {
-    // setNewUserEntry((user) => user + 3);
-    console.log("close modal handler");
+    setNewUserEntry((user) => user + 3);
     setIsModalOpen(false);
   };
+  if (searchPerformed) {
+    // setVehicleHistoryArray(userSearchArray);
+    console.log(vehicleHistoryArray);
+  }
   const customerDetailsList = vehicleHistoryArray.map((user) => (
     <CustomerDetails
       rego={user.rego}

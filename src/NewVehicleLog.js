@@ -16,8 +16,12 @@ export default function NewVehicleLog(props) {
   const driverNameRef = useRef();
   const purposeRef = useRef();
   const regoRef = useRef();
-  const [regoHelper, setRegoHelper] = useState(true);
-  let regoError;
+  const [inputHelper, setInputHelper] = useState({
+    rego: true,
+    driver: true,
+    purpose: true,
+    date: true,
+  });
   const userDetailsHandler = (event) => {
     event.preventDefault();
     const rego = regoRef.current.value;
@@ -25,11 +29,15 @@ export default function NewVehicleLog(props) {
     const purpose = purposeRef.current.value;
     const date = dateRef.current.value;
     const regoIsValid = !isEmpty(rego);
-    setRegoHelper(regoIsValid);
+    setInputHelper({
+      rego: rego,
+      driver: driverId,
+      purpose: purpose,
+      date: date,
+    });
     const driverIdIsValid = !isEmpty(driverId);
     const purposeIsValid = !isEmpty(purpose);
     const dateIsValid = !isEmpty(date);
-    regoError = `${regoHelper ? " " : "incorrect entry"}`;
     const formIsvalid =
       regoIsValid && driverIdIsValid && purposeIsValid && dateIsValid;
     if (!formIsvalid) {
@@ -38,7 +46,7 @@ export default function NewVehicleLog(props) {
     props.onClose();
     const vId = Math.round(Math.random() * 33);
     const db = getDatabase();
-    console.log("after db");
+
     set(ref(db, "vehicleHistory/" + vId), {
       rego: rego,
       driverId: driverId,
@@ -66,27 +74,21 @@ export default function NewVehicleLog(props) {
             style={{ marginBottom: "1rem" }}
             id="outlined-error-helper-text"
             label="rego"
-            helperText={regoHelper ? " " : "incorrect entry"}
+            helperText={inputHelper.rego ? " " : "incorrect entry"}
             inputRef={regoRef}
           />
-          {/* <TextField
-            error
-            id="outlined-error-helper-text"
-            label="Error"
-            defaultValue="Hello World"
-            helperText="Incorrect entry."
-          /> */}
           <TextField
             style={{ marginBottom: "1rem" }}
             label="driver"
+            helperText={inputHelper.driver ? " " : "incorrect entry"}
             inputRef={driverNameRef}
           />
 
           <Select
             style={{ marginBottom: "1rem" }}
             inputRef={purposeRef}
-            value={value}
             label="purpose"
+            helperText={inputHelper.purpose ? " " : "please select one"}
           >
             <MenuItem value={"rent"}>Rent</MenuItem>
             <MenuItem value={"return"}>Return</MenuItem>
@@ -99,6 +101,7 @@ export default function NewVehicleLog(props) {
               label="date"
               value={value}
               inputRef={dateRef}
+              helperText={inputHelper.date ? " " : "please enter in dd/mm/yyyy"}
               onChange={(newValue) => {
                 setValue(newValue);
               }}
@@ -106,7 +109,6 @@ export default function NewVehicleLog(props) {
             />
           </LocalizationProvider>
         </Card>
-        {/* <p>please check the details entered</p> */}
         <Button
           variant="contained"
           onClick={userDetailsHandler}
