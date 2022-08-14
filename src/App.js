@@ -20,7 +20,11 @@ function App() {
       const response = await fetch(
         "https://vehicledetails-5ba2b-default-rtdb.firebaseio.com/vehicleHistory.json"
       );
-      console.log(response);
+      console.log(response.status);
+      if (response.status === 404) {
+        console.log("error ");
+        return;
+      }
       if (!response.ok) {
         throw new Error(
           "Something went wrong. Please check your network connection and try again"
