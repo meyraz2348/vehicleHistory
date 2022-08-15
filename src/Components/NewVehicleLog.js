@@ -7,7 +7,7 @@ import React from "react";
 import { useState, useRef } from "react";
 import { getDatabase, ref, set } from "firebase/database";
 import firebase from "../../src/firebase";
-import Modal from "./Modal";
+import Modal from "../UI/Modal";
 import classes from "./NewVehicleLog.module.css";
 import { calculateNewValue } from "@testing-library/user-event/dist/utils";
 export default function NewVehicleLog(props) {
@@ -119,6 +119,9 @@ export default function NewVehicleLog(props) {
           variant="contained"
           onClick={userDetailsHandler}
           className={classes.createEntryButton}
+          style={{
+            backgroundColor: "#828382",
+          }}
         >
           add vehicle log
         </Button>
