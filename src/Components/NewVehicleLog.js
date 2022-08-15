@@ -3,10 +3,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import React from "react";
+// import { makeStyles } from "@material-ui/core/styles";
 import { useState, useRef } from "react";
 import { getDatabase, ref, set } from "firebase/database";
-import firebase from "./firebase";
+import firebase from "../../src/firebase";
 import Modal from "./Modal";
+import classes from "./NewVehicleLog.module.css";
+import { calculateNewValue } from "@testing-library/user-event/dist/utils";
 export default function NewVehicleLog(props) {
   const [value, setValue] = useState(null);
   const [isValid, setIsValid] = useState(true);
@@ -22,6 +25,10 @@ export default function NewVehicleLog(props) {
     purpose: true,
     date: true,
   });
+  const backdropHandler = () => {
+    console.log("inside back");
+    props.onClose();
+  };
   const userDetailsHandler = (event) => {
     event.preventDefault();
     const rego = regoRef.current.value;
@@ -41,6 +48,7 @@ export default function NewVehicleLog(props) {
     const formIsvalid =
       regoIsValid && driverIdIsValid && purposeIsValid && dateIsValid;
     if (!formIsvalid) {
+      // props.onClose()
       return;
     }
     props.onClose();
@@ -54,38 +62,32 @@ export default function NewVehicleLog(props) {
       date: date,
     });
   };
+  // const useStyles = makeStyles({
+  //   input: {
+  //     color: "blue",
+  //   },
+  // });
   return (
-    <Modal onClose={props.onClose}>
-      <div
-        style={{
-          margin: "translate(50%,50%) auto",
-          padding: "2rem",
-        }}
-      >
-        <Card
-          style={{
-            maxWidth: "20rem",
-            maxHeight: "20rem",
-            display: "inline-grid",
-            padding: "1rem",
-          }}
-        >
+    <Modal onClick={backdropHandler}>
+      <div className={classes.newVehicleLog}>
+        <Card className={classes.vehicleLogCard}>
           <TextField
-            style={{ marginBottom: "1rem" }}
+            className={classes.rego}
             id="outlined-error-helper-text"
             label="rego"
+            // inputProps={{ className: classes.input }}
             helperText={inputHelper.rego ? " " : "incorrect entry"}
             inputRef={regoRef}
           />
           <TextField
-            style={{ marginBottom: "1rem" }}
+            className={classes.driver}
             label="driver"
             helperText={inputHelper.driver ? " " : "incorrect entry"}
             inputRef={driverNameRef}
           />
 
           <Select
-            style={{ marginBottom: "1rem" }}
+            className={classes.purpose}
             inputRef={purposeRef}
             label="purpose"
             helperText={inputHelper.purpose ? " " : "please select one"}
@@ -94,8 +96,10 @@ export default function NewVehicleLog(props) {
             <MenuItem value={"return"}>Return</MenuItem>
           </Select>
           <LocalizationProvider
+            style={{
+              border: "1px solid red",
+            }}
             dateAdapter={AdapterDateFns}
-            style={{ marginBottom: "1rem" }}
           >
             <DatePicker
               label="date"
@@ -105,19 +109,18 @@ export default function NewVehicleLog(props) {
               onChange={(newValue) => {
                 setValue(newValue);
               }}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => (
+                <TextField {...params} className={classes.date} />
+              )}
             />
           </LocalizationProvider>
         </Card>
         <Button
           variant="contained"
           onClick={userDetailsHandler}
-          style={{
-            marginTop: "0.75rem",
-            marginLeft: "27%",
-          }}
+          className={classes.createEntryButton}
         >
-          insert
+          add vehicle log
         </Button>
       </div>
     </Modal>

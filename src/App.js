@@ -1,9 +1,9 @@
-import NewVehicleLog from "./NewVehicleLog";
-import "./App.css";
+import NewVehicleLog from "./Components/NewVehicleLog";
+import classes from "./App.module.css";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
-import CustomerDetails from "./CustomerDetails";
+import CustomerDetails from "./Components/CustomerDetails";
 import Container from "@mui/material/Container";
 
 function App() {
@@ -92,78 +92,47 @@ function App() {
     />
   ));
   return (
-    <div className="App">
-      <div
-        style={{
-          minWidth: "15rem",
-          borderRadius: "10px",
-          maxWidth: "60rem",
-          margin: "0 auto",
-          marginBottom: "1rem",
-          transform: "translateY(19%)",
-        }}
-      >
-        <TextField
-          id="outlined-basic"
-          label=""
-          size="small"
-          variant="outlined"
-          inputRef={searchRef}
-          style={{
-            minWidth: "5rem",
-            width: "90%",
-            transform: "translateY(5%)",
-          }}
-        />
-        <Button
-          variant="contained"
-          onClick={userSearchHandler}
-          style={{
-            transform: "translateY(5%)",
-            backgroundColor: "#828382",
-          }}
-        >
-          search
-        </Button>
-
+    <div className={classes.app}>
+      <div className={classes.nav}>
+        <div className={classes.navBar}>
+          <TextField
+            className={classes.textField}
+            id="outlined-basic"
+            label=""
+            size="small"
+            variant="outlined"
+            inputRef={searchRef}
+          />
+          <Button
+            variant="contained"
+            onClick={userSearchHandler}
+            style={{
+              backgroundColor: "#828382",
+              marginLeft: "0.75rem",
+            }}
+            className={classes.searchButton}
+          >
+            search
+          </Button>
+        </div>
         {isModalOpen && <NewVehicleLog onClose={closeModalHandler} />}
       </div>
-      <Container
-        maxWidth="40rem"
-        style={{
-          overflow: "hidden",
-          borderRadius: "20px",
-        }}
-      >
-        <section
+      <div className={classes.containerDiv}>
+        <Container maxWidth="40rem" className={classes.container}>
+          <section className={classes.section}>{customerDetailsList}</section>
+        </Container>
+        <Button
+          variant="contained"
+          onClick={openModalHandler}
+          className={classes.insertButton}
           style={{
-            maxWidth: "60rem",
-            maxHeight: "47.5rem",
-            width: "100%",
-            padding: "2px",
-            borderRadius: "25px",
-            backgroundColor: "#c1bfc057",
-            textAlign: "center",
-            margin: "0 auto",
-            overflow: "scroll",
-            transform: "translateY(4%)",
-            placeContent: "center",
+            backgroundColor: "#828382",
+            marginTop: "1.5rem",
           }}
         >
-          {customerDetailsList}
-        </section>
-      </Container>
-      <Button
-        variant="contained"
-        onClick={openModalHandler}
-        style={{
-          left: "45% ",
-          transform: "translateY(15%)",
-          backgroundColor: "#828382",
-        }}
-      >
-        Insert
-      </Button>
+          Insert
+        </Button>
+      </div>
     </div>
   );
 }

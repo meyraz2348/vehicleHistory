@@ -1,0 +1,74 @@
+@media (min-width: 420px) {
+  .customerDetailsSection {
+    display: flex;
+    border-radius: 25px;
+    place-content: center;
+    margin: 10px 5px;
+    max-height: 7rem;
+  }
+  .regoCard,
+  .driverCard {
+    width: 18rem;
+    margin: auto;
+  }
+  .regoPara,
+  .driverPara {
+    font-size: 1.75rem;
+  }
+  .purposeCard {
+    display: block;
+    place-items: center;
+  }
+  .purposePara {
+    font-size: 0.75rem;
+  }
+  .purposeIcon {
+    margin: auto;
+    font-size: 3rem;
+    margin-top: auto;
+  }
+  .datePara {
+    font-size: 0.75rem;
+    margin-top: auto;
+  }
+}
+@media (max-width: 420px) {
+  .customerDetailsSection {
+    max-height: 4rem;
+    border-radius: 15px;
+    margin: 8px 4px;
+    display: flex;
+  }
+  .regoCard,
+  .driverCard {
+    width: 6rem;
+    margin: auto;
+    overflow: hidden;
+  }
+  .regoPara,
+  .driverPara {
+    font-size: 0.7rem;
+  }
+  .purposeCard {
+    display: block;
+    width: 7rem;
+    place-items: center;
+  }
+  .purposePara {
+    font-size: 0.5rem;
+    font-weight: bold;
+    justify-self: flex-end;
+  }
+  .purposeIcon {
+    margin: auto;
+    width: 5rem;
+    font-size: 1.5rem;
+    margin-top: -0.25rem;
+  }
+  .datePara {
+    font-size: 0.5rem;
+    font-weight: bold;
+    margin-top: auto;
+    margin-bottom: 0.25rem;
+  }
+}
