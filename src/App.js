@@ -77,6 +77,7 @@ function App() {
   };
   const closeModalHandler = (props) => {
     setNewUserEntry((user) => user + 3);
+    console.log("adding new log");
     setIsModalOpen(false);
   };
   if (searchPerformed) {

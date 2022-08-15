@@ -63,12 +63,13 @@
     margin: auto;
     width: 5rem;
     font-size: 1.5rem;
-    margin-top: -0.25rem;
+    margin-top: -0.55rem;
   }
   .datePara {
     font-size: 0.5rem;
     font-weight: bold;
     margin-top: auto;
+    margin-top: -0.25rem;
     margin-bottom: 0.25rem;
   }
 }
