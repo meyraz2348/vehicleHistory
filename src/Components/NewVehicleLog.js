@@ -48,7 +48,6 @@ export default function NewVehicleLog(props) {
     const formIsvalid =
       regoIsValid && driverIdIsValid && purposeIsValid && dateIsValid;
     if (!formIsvalid) {
-      // props.onClose()
       return;
     }
     props.onClose();
@@ -62,11 +61,7 @@ export default function NewVehicleLog(props) {
       date: date,
     });
   };
-  // const useStyles = makeStyles({
-  //   input: {
-  //     color: "blue",
-  //   },
-  // });
+
   return (
     <Modal onClick={backdropHandler}>
       <div className={classes.newVehicleLog}>
@@ -75,7 +70,6 @@ export default function NewVehicleLog(props) {
             className={classes.rego}
             id="outlined-error-helper-text"
             label="rego"
-            // inputProps={{ className: classes.input }}
             helperText={inputHelper.rego ? " " : "incorrect entry"}
             inputRef={regoRef}
           />
